@@ -17,16 +17,8 @@ pip install django
 
 ```bash
 django-admin startproject project_name_here
-.urls.py`:
-
-```python
-
-```cd project_name_here
-.urls.py`:
-
-```python
-
-``````
+cd project_name_here
+```
 
 ## Create New App
 
@@ -34,11 +26,7 @@ django-admin startproject project_name_here
 python manage.py startapp app_name_here
 ```
 
-Inside `project_name_here..urls.py`:
-
-```python
-
-```setings.py`:
+Inside `project_name_here/urls.py`:
 
 ```python
 INSTALLED_APPS = [
