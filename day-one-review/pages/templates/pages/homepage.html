@@ -1,0 +1,19 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+    <h1>Better Than Yelp</h1>
+
+    {% for review in reviews %}
+
+    <h3>{{ review.title }}</h3>
+
+    <span>Rating: {{ review.rating }}/5 stars</span>
+
+    <p>{{ review.location }}</p>
+
+    <img src="{{ review.image }}" />
+
+    {% endfor %}
+
+{% endblock %}

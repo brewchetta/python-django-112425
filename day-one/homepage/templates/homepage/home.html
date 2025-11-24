@@ -1,0 +1,22 @@
+{% extends 'homepage/base.html' %}
+
+{% block content %}
+<!-- write stuff here -->
+
+<h1>Welcome to My Portfolio Site</h1>
+
+<h2>{{ dev_name }}</h2>
+
+<p>Your username: {{ profile.username }} | Your password: {{ profile.password }}</p>
+
+<p>This is my amazing portfolio. I hope you really really like it!</p>
+
+<div>
+    {% for project in projects %}
+
+        <p>{{ project.name }} - <a href="{{ project.link }}">Link</a></p>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
