@@ -1,0 +1,25 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<h1>Books</h1>
+
+{% for book in books %}
+
+    <a href="{% url 'show_book' slug=book.slug %}">
+    <div>
+        <h2>{{ book.title }}</h2> 
+        <h3>{{ book.author.name }}</h3>
+        <p>Synopsis goes here</p>
+    </div>
+    </a>
+
+{% endfor %}
+
+{% endblock %}
+
+<!-- database -->
+
+<!-- persistance - that info doesn't disappear -->
+<!-- CRUD - create read update delete -->
+<!-- SQL -->
