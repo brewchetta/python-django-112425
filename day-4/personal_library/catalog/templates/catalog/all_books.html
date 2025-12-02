@@ -2,6 +2,21 @@
 
 {% block content %}
 
+<!-- checks if a user is logged in -->
+{% if user.username %}
+    <p>Welcome {{ user.username }}!!!</p>
+    <a href="{% url 'logout_user' %}">Logout</a>
+
+<!-- if not logged in -->
+{% else %}
+
+    <a href="{% url 'signup' %}">Sign Up</a>
+    <a href="{% url 'login_user' %}">Login</a>
+
+{% endif %}
+
+<p></p>
+
 <h1>Books</h1>
 
 <a href="{% url 'create_author' %}">Create Author</a>

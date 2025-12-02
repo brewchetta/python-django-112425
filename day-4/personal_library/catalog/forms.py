@@ -1,5 +1,7 @@
 from django import forms
-from .models import Book, Author
+from .models import Book, Author, Librarian
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # book form inherits from ModelForm
 class BookForm(forms.ModelForm):
@@ -14,26 +16,20 @@ class AuthorForm(forms.ModelForm):
         model = Author
         fields = ['name', 'background']
 
+# special sign up form inherits from special UserCreationForm
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
+# instead of a model form we use a generic form here
+class LoginForm(forms.Form):
+    # this is a normal character field
+    username = forms.CharField(max_length=100)
+    # this is a character field that hides the password
+    password = forms.CharField(widget=forms.PasswordInput)
 
-
-
-
-
-
-
-
-    # LUNCH - RETURN AT 2:05 EST
-    # LUNCH - RETURN AT 2:05 EST
-        # LUNCH - RETURN AT 2:05 EST
-            # LUNCH - RETURN AT 2:05 EST
-                # LUNCH - RETURN AT 2:05 EST
-                    # LUNCH - RETURN AT 2:05 EST
-                        # LUNCH - RETURN AT 2:05 EST
-                            # LUNCH - RETURN AT 2:05 EST
-                                # LUNCH - RETURN AT 2:05 EST
-                                    # LUNCH - RETURN AT 2:05 EST
-                                        # LUNCH - RETURN AT 2:05 EST
-                                            # LUNCH - RETURN AT 2:05 EST
-                                                # LUNCH - RETURN AT 2:05 EST
-                                                
+class LibrarianForm(forms.ModelForm):
+    class Meta:
+        model = Librarian
+        fields = ['first_name', 'last_name']

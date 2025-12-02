@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book, Author
 from django.http import Http404
-from .forms import BookForm, AuthorForm
+from .forms import BookForm, AuthorForm, SignUpForm, LibrarianForm, LoginForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 # HELPER FUNCTION
 
@@ -15,7 +17,8 @@ def all_books(request):
     context = {
         # Book.objects is generally how we query for certain instances of books
         # the .all() means just get all of em
-        "books": Book.objects.all()
+        "books": Book.objects.all(),
+        "user": request.user
     }
     return render(request, 'catalog/all_books.html', context)
 
@@ -111,6 +114,7 @@ def author_bio(request, id):
         raise Http404("Author not found")
     
 
+@login_required
 def create_author(request):
     if request.method == "GET":
         form = AuthorForm()
@@ -123,6 +127,7 @@ def create_author(request):
             return redirect('author_bio', saved_author.id)
 
 
+@login_required
 def edit_author(request, id):
     author = Author.objects.get(pk=id)
     if request.method == "GET":
@@ -136,6 +141,7 @@ def edit_author(request, id):
             return redirect('author_bio', author.id)
         
 
+@login_required
 def delete_author(request, id):
     author = Author.objects.get(pk=id)
     if request.method == "GET":
@@ -144,5 +150,74 @@ def delete_author(request, id):
     elif request.method == "POST":
         author.delete()
         return redirect("all_books")
+    
 
-# CRUD - create read update delete
+# LIBRARIAN / USER
+
+def signup(request):
+    if request.method == "GET":
+        context = { "form": SignUpForm() }
+        return render(request, "catalog/signup.html", context)
+    elif request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # login >>> mainly creates a new cookie with our user info to let the frontend know that a user is logged in
+            login(request, user)
+            return redirect('create_librarian')
+        else:
+            context = { "form": form }
+            return render(request, "catalog/signup.html", context)
+
+
+# login_required decorator will block people who aren't logged in
+@login_required
+def create_librarian(request):
+    if request.method == "GET":
+        context = { "form": LibrarianForm() }
+        return render(request, 'catalog/create_librarian.html', context)
+    elif request.method == "POST":
+        form = LibrarianForm(request.POST)
+        # commit=False means this won't get saved to the db yet
+        librarian = form.save(commit=False)
+        # we attach the logged in user to the librarian profile
+        librarian.user = request.user
+        # we properly insert the librarian into the db
+        librarian.save()
+        return redirect('all_books')
+
+
+def login_user(request):
+    if request.method == "GET":
+        # login form is special bc it's not attached to a model
+        # essentially it's just a generic form
+        context = { "form": LoginForm() }
+        return render(request, 'catalog/login.html', context)
+    elif request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            # we get the username and password values
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            # we use the username/password combo to find and authenticate the user
+            user = authenticate(request, username=username, password=password)
+            if user: # if a user matched that username/password combo
+                # now we login (sets the session cookie)
+                login(request, user)
+                return redirect('all_books')
+            else: # otherwise just re-render the form
+                context = { "form": form }
+                return render(request, 'catalog/login.html', context)
+        else:
+            context = { "form": form }
+            return render(request, 'catalog/login.html', context)
+
+
+@login_required
+def logout_user(request):
+    # this will destroy the cookie/session which means nobody is logged in anymore
+    logout(request)
+    return redirect('all_books')
+
+
+# CRUD - Create Read Update Delete

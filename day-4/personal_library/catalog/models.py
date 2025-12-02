@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User # special user model
 
 # one to many - for example an author has many books
     # a book belongs to an author
@@ -38,6 +39,19 @@ class Book(models.Model): # inheriting from the built in Model
 
     def __str__(self):
         return self.title
+    
+
+class Librarian(models.Model):
+    # we get the user model from django's special auth module
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # directly links the librarian to the user
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    # years_employed = models.IntegerField()
+    # date_joined = models.DateField()
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 # migration - version history

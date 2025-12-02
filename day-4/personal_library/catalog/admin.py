@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # import each model that you want available
-from .models import Book, Author, Genre
+from .models import Book, Author, Genre, Librarian
 
 # create a valid login / superuser so you can access the admin panel
 # python manage.py createsuperuser
@@ -11,3 +11,4 @@ from .models import Book, Author, Genre
 admin.site.register(Book)
 admin.site.register(Author)
 admin.site.register(Genre)
+admin.site.register(Librarian)

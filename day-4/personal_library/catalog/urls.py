@@ -13,4 +13,10 @@ urlpatterns = [
     path("authors/create", views.create_author, name="create_author"),
     path("authors/<int:id>/edit", views.edit_author, name="edit_author"),
     path("authors/<int:id>/delete", views.delete_author, name="delete_author"),
+
+    # LIBRARIAN / USER PATHS
+    path("signup", views.signup, name="signup"),
+    path("create-librarian", views.create_librarian, name="create_librarian"),
+    path("login-user", views.login_user, name="login_user"),
+    path("logout-user", views.logout_user, name="logout_user")
 ]
