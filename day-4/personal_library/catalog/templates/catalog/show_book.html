@@ -14,4 +14,8 @@
 
 <p>Synopsis would go here if we decided to add synopses here</p>
 
+<a href="{% url 'edit_book' slug=book.slug %}">Edit</a>
+
+<a href="{% url 'delete_book' slug=book.slug %}">Delete</a>
+
 {% endblock %}

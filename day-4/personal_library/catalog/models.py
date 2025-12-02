@@ -26,8 +26,14 @@ class Genre(models.Model):
 
 class Book(models.Model): # inheriting from the built in Model
     title = models.CharField(max_length=100)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE) # foreign key shows what this belongs to
     slug = models.SlugField(unique=True)
+
+    # foreign key shows what this belongs to
+    # foreign key references a different table (authors table)
+    # on_delete determines what happens when the author gets deleted (delete all books here)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+    # many to many means a book can belong to many genres and a genre can have many books
     genres = models.ManyToManyField(Genre)
 
     def __str__(self):
@@ -36,3 +42,16 @@ class Book(models.Model): # inheriting from the built in Model
 
 # migration - version history
 # we can track changes to the structure of our database
+
+# python manage.py makemigrations 
+
+# ^^^ this will generate the migrations, kind of similar to git add
+# you can see your migration history in the migrations folder
+
+# when you have migrations ready you can run:
+
+# python manage.py migrate
+
+# this be what actually alters the db and creates the structure for the models, kind of similar to git commit
+
+# after adding models it's STRONGLY recommended you also now add them to the admin.py

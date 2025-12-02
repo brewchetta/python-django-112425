@@ -6,6 +6,10 @@
 
 <p>{{ author.background }}</p>
 
+<a href="{% url 'edit_author' author.id %}">Edit</a>
+
+<a href="{% url 'delete_author' author.id %}">Delete</a>
+
 {% for book in author_books %}
 
     <p>{{ book.title }} - <a href="{% url 'show_book' slug=book.slug %}">Link</a></p>
