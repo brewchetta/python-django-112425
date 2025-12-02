@@ -1,0 +1,15 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<h1>{{ author.name }}</h1>
+
+<p>{{ author.background }}</p>
+
+{% for book in author_books %}
+
+    <p>{{ book.title }} - <a href="{% url 'show_book' slug=book.slug %}">Link</a></p>
+
+{% endfor %}
+
+{% endblock %}

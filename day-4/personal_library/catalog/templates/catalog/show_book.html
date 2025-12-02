@@ -1,0 +1,17 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<h1>{{ book.title }}</h1>
+
+<a href="{% url 'author_bio' id=book.author.id %}"><h2>{{ book.author.name }}</h2></a>
+
+{% for genre in book.genres.all %}
+
+    <span>{{ genre.name }}</span>
+
+{% endfor %}
+
+<p>Synopsis would go here if we decided to add synopses here</p>
+
+{% endblock %}
