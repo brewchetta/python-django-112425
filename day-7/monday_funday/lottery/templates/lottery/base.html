@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winning Lottery Tickets</title>
+</head>
+<body>
+
+    <h1>Winning Lotto Tickets.com</h1>
+
+    <nav>
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'lottery_number_create' %}">New Lotto Number</a>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+    
+</body>
+</html>

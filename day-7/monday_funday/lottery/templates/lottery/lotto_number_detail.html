@@ -1,0 +1,20 @@
+{% extends 'lottery/base.html' %}
+
+{% block content %}
+
+<!-- object is the LottoNumber instance -->
+<!-- because we are in a view where the model = LottoNumber the object will always be a lotto number -->
+<p>Winning Numbers: {{ object.winning_numbers }}</p>
+
+<p>Date: {{ object.date }}</p>
+
+<p>Location: {{ object.location }}</p>
+
+<p>Winning Amount: {{ object.dollar_amount }}</p>
+
+<p>Rounds: {{ object.rounds_not_won }}</p>
+
+<p>Winner: {{ object.winner.first_name }} {{ object.winner.last_name }}</p>
+<p>{{ object.winner.address }}</p>
+
+{% endblock %}

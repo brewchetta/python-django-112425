@@ -1,0 +1,12 @@
+{% extends 'lottery/base.html' %}
+
+{% block content %}
+
+<!-- object is the winner instance tied to the primary key (pk) -->
+<p>{{ object.first_name }} {{ object.last_name }}</p>
+
+<p>Address: {{ object.address }}</p>
+
+<p>Age: {{ object.age }}</p>
+
+{% endblock %}

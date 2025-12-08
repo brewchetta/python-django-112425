@@ -1,0 +1,21 @@
+Afternoon Deliverables
+
+Continue working / building your project specifically:
+
+1. Add models to the project as you require
+
+2. Add auth to the project (login / signup)
+
+3. Users need to be logged in to do anthing other than read from the db
+
+--- OR ---
+
+1. Generate a new project and a new application for that project
+
+2. Create at least 2 models for your application, one of them must have a foreign key linking to the other model.
+
+3. Generate a homepage and views that makes sense.
+
+4. Generate routes for full CRUD for at least one of your models.
+
+BONUS: Add the User model and allow for login / signup

@@ -1,0 +1,14 @@
+{% extends 'lottery/base.html' %}
+
+{% block content %}
+
+<h2>Recent Winners</h2>
+
+<!-- object_list is a list of each winner -->
+{% for winner in object_list %}
+
+    <p>{{ winner.first_name}} {{ winner.last_name }}</p>
+
+{% endfor %}
+
+{% endblock %}

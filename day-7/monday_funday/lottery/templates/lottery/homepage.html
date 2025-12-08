@@ -1,0 +1,21 @@
+{% extends 'lottery/base.html' %}
+
+{% block content %}
+
+<h2>These are the recent winning lotto numbers:</h2>
+
+<!-- object_list is made up of lotto numbers -->
+{% for lotto_num in object_list %}
+
+    <p>{{ lotto_num.winning_numbers }}</p>
+    <p>{{ lotto_num.date }}</p>
+
+    {% if lotto_num.winner %}
+
+    <p>Winner: {{ lotto_num.winner }}</p>
+
+    {% endif %}
+
+{% endfor %}
+
+{% endblock %}
