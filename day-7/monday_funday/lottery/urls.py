@@ -14,5 +14,7 @@ urlpatterns = [
 
     path('winners', views.WinnerListView.as_view(), name="winners_list"),
 
-    path('winners/<int:pk>', views.WinnerDetailView.as_view(), name="winners_detail")
+    path('winners/<int:pk>', views.WinnerDetailView.as_view(), name="winners_detail"),
+
+    path('winners/create', views.new_winner, name="winners_create")
 ]

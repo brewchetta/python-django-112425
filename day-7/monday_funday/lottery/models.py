@@ -7,6 +7,9 @@ class Winner(models.Model):
     last_name = models.CharField()
     age = models.IntegerField()
     address = models.CharField()
+    # add the ability to take in images
+    profile_pic = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    # can add things like max_upload_size which I believe defaults to number of bytes
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

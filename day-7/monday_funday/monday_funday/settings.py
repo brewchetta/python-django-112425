@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# base dir helps us with the absolute path to our project
 
 
 # Quick-start development settings - unsuitable for production
@@ -116,3 +118,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+# this says that we will store our media in the 'media' directory in this base directory
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# this says the url will have '/media/' to start with and we'll find our files in there
+MEDIA_URL = '/media/'

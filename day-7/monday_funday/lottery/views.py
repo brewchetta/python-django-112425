@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import LottoNumber, Winner
 from django.views.generic import DetailView, ListView, CreateView
 from django.urls import reverse_lazy
+from .forms import WinnerForm
 
 
 # list view is for all items
@@ -35,6 +36,20 @@ class WinnerListView(ListView):
 class WinnerDetailView(DetailView):
     model = Winner
     template_name = 'lottery/winner_detail_view.html'
+
+
+def new_winner(request):
+    if request.method == "GET":
+        # if we have a GET request etc.
+        context = { "form": WinnerForm() }
+        return render(request, 'lottery/winner_form.html', context)
+    elif request.method == "POST":
+        # if someone is submitting with a POST
+        form = WinnerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('winners_list')
+
 
 
 # below is considered the functional way of building a view

@@ -7,7 +7,9 @@
 <!-- object_list is a list of each winner -->
 {% for winner in object_list %}
 
-    <p>{{ winner.first_name}} {{ winner.last_name }}</p>
+    <a href="{% url 'winners_detail' pk=winner.id %}">
+        {{ winner.first_name}} {{ winner.last_name }}
+    </a>
 
 {% endfor %}
 
