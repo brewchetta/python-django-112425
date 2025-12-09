@@ -9,7 +9,8 @@ class Winner(models.Model):
     address = models.CharField()
     # add the ability to take in images
     profile_pic = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
-    # can add things like max_upload_size which I believe defaults to number of bytes
+    # for images we can add things like max_upload_size which I believe limits the number of bytes
+    # upload_to is a subfolder within our media folder to save images
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

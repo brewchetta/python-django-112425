@@ -38,6 +38,7 @@ class WinnerDetailView(DetailView):
     template_name = 'lottery/winner_detail_view.html'
 
 
+# yes you can mix class views with functional views!
 def new_winner(request):
     if request.method == "GET":
         # if we have a GET request etc.
@@ -45,6 +46,7 @@ def new_winner(request):
         return render(request, 'lottery/winner_form.html', context)
     elif request.method == "POST":
         # if someone is submitting with a POST
+        # very importantly we need to also accept the request.FILES to get the image here
         form = WinnerForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
